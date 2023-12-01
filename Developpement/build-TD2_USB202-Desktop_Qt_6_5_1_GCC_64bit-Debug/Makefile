@@ -53,8 +53,10 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../TD2_USB202/main.cpp \
+		../TD2_USB202/mcculdaq.cpp \
 		../TD2_USB202/widgetusb202.cpp moc_widgetusb202.cpp
 OBJECTS       = main.o \
+		mcculdaq.o \
 		widgetusb202.o \
 		moc_widgetusb202.o
 DIST          = /opt/Qt/6.5.1/gcc_64/mkspecs/features/spec_pre.prf \
@@ -332,6 +334,7 @@ DIST          = /opt/Qt/6.5.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt/6.5.1/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt/6.5.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt/6.5.1/gcc_64/mkspecs/features/spec_post.prf \
+		../TD2_USB202/.qmake.stash \
 		/opt/Qt/6.5.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt/6.5.1/gcc_64/mkspecs/features/toolchain.prf \
 		/opt/Qt/6.5.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -352,7 +355,9 @@ DIST          = /opt/Qt/6.5.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt/6.5.1/gcc_64/mkspecs/features/exceptions.prf \
 		/opt/Qt/6.5.1/gcc_64/mkspecs/features/yacc.prf \
 		/opt/Qt/6.5.1/gcc_64/mkspecs/features/lex.prf \
-		../TD2_USB202/TD2_USB202.pro ../TD2_USB202/widgetusb202.h ../TD2_USB202/main.cpp \
+		../TD2_USB202/TD2_USB202.pro ../TD2_USB202/mcculdaq.h \
+		../TD2_USB202/widgetusb202.h ../TD2_USB202/main.cpp \
+		../TD2_USB202/mcculdaq.cpp \
 		../TD2_USB202/widgetusb202.cpp
 QMAKE_TARGET  = TD2_USB202
 DESTDIR       = 
@@ -640,6 +645,7 @@ Makefile: ../TD2_USB202/TD2_USB202.pro /opt/Qt/6.5.1/gcc_64/mkspecs/linux-g++/qm
 		/opt/Qt/6.5.1/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt/6.5.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt/6.5.1/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/opt/Qt/6.5.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt/6.5.1/gcc_64/mkspecs/features/toolchain.prf \
 		/opt/Qt/6.5.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -940,6 +946,7 @@ Makefile: ../TD2_USB202/TD2_USB202.pro /opt/Qt/6.5.1/gcc_64/mkspecs/linux-g++/qm
 /opt/Qt/6.5.1/gcc_64/mkspecs/features/qt_config.prf:
 /opt/Qt/6.5.1/gcc_64/mkspecs/linux-g++/qmake.conf:
 /opt/Qt/6.5.1/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /opt/Qt/6.5.1/gcc_64/mkspecs/features/exclusive_builds.prf:
 /opt/Qt/6.5.1/gcc_64/mkspecs/features/toolchain.prf:
 /opt/Qt/6.5.1/gcc_64/mkspecs/features/default_pre.prf:
@@ -979,8 +986,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt/6.5.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../TD2_USB202/widgetusb202.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../TD2_USB202/main.cpp ../TD2_USB202/widgetusb202.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../TD2_USB202/mcculdaq.h ../TD2_USB202/widgetusb202.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../TD2_USB202/main.cpp ../TD2_USB202/mcculdaq.cpp ../TD2_USB202/widgetusb202.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../TD2_USB202/widgetusb202.ui $(DISTDIR)/
 
 
@@ -1173,6 +1180,65 @@ moc_widgetusb202.cpp: ../TD2_USB202/widgetusb202.h \
 		/opt/Qt/6.5.1/gcc_64/include/QtCore/QSizeF \
 		/opt/Qt/6.5.1/gcc_64/include/QtGui/QTransform \
 		/opt/Qt/6.5.1/gcc_64/include/QtCore/qnativeinterface.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/QTimer \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qtimer.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qbasictimer.h \
+		../TD2_USB202/mcculdaq.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/QtGlobal \
+		../include/uldaq.h \
+		../include/UlDaqDeviceManager.h \
+		../include/interfaces/UlDaqDevice.h \
+		../include/interfaces/UlAiDevice.h \
+		../include/interfaces/UlAiConfig.h \
+		../include/interfaces/UlAiInfo.h \
+		../include/interfaces/UlAoDevice.h \
+		../include/interfaces/UlAoConfig.h \
+		../include/interfaces/UlAoInfo.h \
+		../include/interfaces/UlCtrDevice.h \
+		../include/interfaces/UlCtrInfo.h \
+		../include/interfaces/UlCtrConfig.h \
+		../include/interfaces/UlDaqDeviceConfig.h \
+		../include/interfaces/UlDaqDeviceInfo.h \
+		../include/interfaces/UlDevMemInfo.h \
+		../include/interfaces/UlMemRegionInfo.h \
+		../include/interfaces/UlDaqIDevice.h \
+		../include/interfaces/UlDaqIInfo.h \
+		../include/interfaces/UlDaqODevice.h \
+		../include/interfaces/UlDaqOInfo.h \
+		../include/interfaces/UlDioDevice.h \
+		../include/interfaces/UlDioConfig.h \
+		../include/interfaces/UlDioInfo.h \
+		../include/interfaces/UlTmrDevice.h \
+		../include/interfaces/UlTmrInfo.h \
+		../include/UlException.h \
+		../include/DioDevice.h \
+		../include/IoDevice.h \
+		../include/DaqDevice.h \
+		../include/DaqDeviceId.h \
+		../include/DaqDeviceInfo.h \
+		../include/ul_internal.h \
+		../include/DevMemInfo.h \
+		../include/MemRegionInfo.h \
+		../include/DaqDeviceConfig.h \
+		../include/utility/FnLog.h \
+		../include/utility/Endian.h \
+		../include/utility/UlLock.h \
+		../include/utility/ThreadEvent.h \
+		../include/DioInfo.h \
+		../include/DioPortInfo.h \
+		../include/interfaces/UlDioPortInfo.h \
+		../include/DioConfig.h \
+		../include/AoDevice.h \
+		../include/AoInfo.h \
+		../include/AoConfig.h \
+		../include/AiDevice.h \
+		../include/AiInfo.h \
+		../include/AiChanInfo.h \
+		../include/interfaces/UlAiChanInfo.h \
+		../include/AiConfig.h \
+		../include/CtrDevice.h \
+		../include/CtrInfo.h \
+		../include/CtrConfig.h \
 		moc_predefs.h \
 		/opt/Qt/6.5.1/gcc_64/libexec/moc
 	/opt/Qt/6.5.1/gcc_64/libexec/moc $(DEFINES) --include /home/USERS/ELEVES/SNIR2022/molivier/Documents/SNIR2/E5.2-Equilibreuse/Developpement/build-TD2_USB202-Desktop_Qt_6_5_1_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt/6.5.1/gcc_64/mkspecs/linux-g++ -I/home/USERS/ELEVES/SNIR2022/molivier/Documents/SNIR2/E5.2-Equilibreuse/Developpement/TD2_USB202 -I/opt/Qt/6.5.1/gcc_64/include -I/opt/Qt/6.5.1/gcc_64/include/QtWidgets -I/opt/Qt/6.5.1/gcc_64/include/QtGui -I/opt/Qt/6.5.1/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../TD2_USB202/widgetusb202.h -o moc_widgetusb202.cpp
@@ -1355,6 +1421,65 @@ main.o: ../TD2_USB202/main.cpp ../TD2_USB202/widgetusb202.h \
 		/opt/Qt/6.5.1/gcc_64/include/QtCore/QSizeF \
 		/opt/Qt/6.5.1/gcc_64/include/QtGui/QTransform \
 		/opt/Qt/6.5.1/gcc_64/include/QtCore/qnativeinterface.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/QTimer \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qtimer.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qbasictimer.h \
+		../TD2_USB202/mcculdaq.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/QtGlobal \
+		../include/uldaq.h \
+		../include/UlDaqDeviceManager.h \
+		../include/interfaces/UlDaqDevice.h \
+		../include/interfaces/UlAiDevice.h \
+		../include/interfaces/UlAiConfig.h \
+		../include/interfaces/UlAiInfo.h \
+		../include/interfaces/UlAoDevice.h \
+		../include/interfaces/UlAoConfig.h \
+		../include/interfaces/UlAoInfo.h \
+		../include/interfaces/UlCtrDevice.h \
+		../include/interfaces/UlCtrInfo.h \
+		../include/interfaces/UlCtrConfig.h \
+		../include/interfaces/UlDaqDeviceConfig.h \
+		../include/interfaces/UlDaqDeviceInfo.h \
+		../include/interfaces/UlDevMemInfo.h \
+		../include/interfaces/UlMemRegionInfo.h \
+		../include/interfaces/UlDaqIDevice.h \
+		../include/interfaces/UlDaqIInfo.h \
+		../include/interfaces/UlDaqODevice.h \
+		../include/interfaces/UlDaqOInfo.h \
+		../include/interfaces/UlDioDevice.h \
+		../include/interfaces/UlDioConfig.h \
+		../include/interfaces/UlDioInfo.h \
+		../include/interfaces/UlTmrDevice.h \
+		../include/interfaces/UlTmrInfo.h \
+		../include/UlException.h \
+		../include/DioDevice.h \
+		../include/IoDevice.h \
+		../include/DaqDevice.h \
+		../include/DaqDeviceId.h \
+		../include/DaqDeviceInfo.h \
+		../include/ul_internal.h \
+		../include/DevMemInfo.h \
+		../include/MemRegionInfo.h \
+		../include/DaqDeviceConfig.h \
+		../include/utility/FnLog.h \
+		../include/utility/Endian.h \
+		../include/utility/UlLock.h \
+		../include/utility/ThreadEvent.h \
+		../include/DioInfo.h \
+		../include/DioPortInfo.h \
+		../include/interfaces/UlDioPortInfo.h \
+		../include/DioConfig.h \
+		../include/AoDevice.h \
+		../include/AoInfo.h \
+		../include/AoConfig.h \
+		../include/AiDevice.h \
+		../include/AiInfo.h \
+		../include/AiChanInfo.h \
+		../include/interfaces/UlAiChanInfo.h \
+		../include/AiConfig.h \
+		../include/CtrDevice.h \
+		../include/CtrInfo.h \
+		../include/CtrConfig.h \
 		/opt/Qt/6.5.1/gcc_64/include/QtWidgets/QApplication \
 		/opt/Qt/6.5.1/gcc_64/include/QtWidgets/qapplication.h \
 		/opt/Qt/6.5.1/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1378,6 +1503,106 @@ main.o: ../TD2_USB202/main.cpp ../TD2_USB202/widgetusb202.h \
 		/opt/Qt/6.5.1/gcc_64/include/QtCore/qlocale.h \
 		/opt/Qt/6.5.1/gcc_64/include/QtGui/qguiapplication_platform.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../TD2_USB202/main.cpp
+
+mcculdaq.o: ../TD2_USB202/mcculdaq.cpp ../TD2_USB202/mcculdaq.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/QtGlobal \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qglobal.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qtversionchecks.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qconfig.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qtconfigmacros.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qtcoreexports.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qtnoop.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qassert.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qtypes.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qtversion.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qlogging.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qflags.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qcompare_impl.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qatomic.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qconstructormacros.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qdarwinhelpers.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qexceptionhandling.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qforeach.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qttypetraits.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qfunctionpointer.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qmalloc.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qminmax.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qnumeric.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qoverload.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qswap.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qtresource.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qttranslation.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qversiontagging.h \
+		../include/uldaq.h \
+		../include/UlDaqDeviceManager.h \
+		../include/interfaces/UlDaqDevice.h \
+		../include/interfaces/UlAiDevice.h \
+		../include/interfaces/UlAiConfig.h \
+		../include/interfaces/UlAiInfo.h \
+		../include/interfaces/UlAoDevice.h \
+		../include/interfaces/UlAoConfig.h \
+		../include/interfaces/UlAoInfo.h \
+		../include/interfaces/UlCtrDevice.h \
+		../include/interfaces/UlCtrInfo.h \
+		../include/interfaces/UlCtrConfig.h \
+		../include/interfaces/UlDaqDeviceConfig.h \
+		../include/interfaces/UlDaqDeviceInfo.h \
+		../include/interfaces/UlDevMemInfo.h \
+		../include/interfaces/UlMemRegionInfo.h \
+		../include/interfaces/UlDaqIDevice.h \
+		../include/interfaces/UlDaqIInfo.h \
+		../include/interfaces/UlDaqODevice.h \
+		../include/interfaces/UlDaqOInfo.h \
+		../include/interfaces/UlDioDevice.h \
+		../include/interfaces/UlDioConfig.h \
+		../include/interfaces/UlDioInfo.h \
+		../include/interfaces/UlTmrDevice.h \
+		../include/interfaces/UlTmrInfo.h \
+		../include/UlException.h \
+		../include/DioDevice.h \
+		../include/IoDevice.h \
+		../include/DaqDevice.h \
+		../include/DaqDeviceId.h \
+		../include/DaqDeviceInfo.h \
+		../include/ul_internal.h \
+		../include/DevMemInfo.h \
+		../include/MemRegionInfo.h \
+		../include/DaqDeviceConfig.h \
+		../include/utility/FnLog.h \
+		../include/utility/Endian.h \
+		../include/utility/UlLock.h \
+		../include/utility/ThreadEvent.h \
+		../include/DioInfo.h \
+		../include/DioPortInfo.h \
+		../include/interfaces/UlDioPortInfo.h \
+		../include/DioConfig.h \
+		../include/AoDevice.h \
+		../include/AoInfo.h \
+		../include/AoConfig.h \
+		../include/AiDevice.h \
+		../include/AiInfo.h \
+		../include/AiChanInfo.h \
+		../include/interfaces/UlAiChanInfo.h \
+		../include/AiConfig.h \
+		../include/CtrDevice.h \
+		../include/CtrInfo.h \
+		../include/CtrConfig.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mcculdaq.o ../TD2_USB202/mcculdaq.cpp
 
 widgetusb202.o: ../TD2_USB202/widgetusb202.cpp ../TD2_USB202/widgetusb202.h \
 		/opt/Qt/6.5.1/gcc_64/include/QtWidgets/QWidget \
@@ -1536,7 +1761,89 @@ widgetusb202.o: ../TD2_USB202/widgetusb202.cpp ../TD2_USB202/widgetusb202.h \
 		/opt/Qt/6.5.1/gcc_64/include/QtCore/QSizeF \
 		/opt/Qt/6.5.1/gcc_64/include/QtGui/QTransform \
 		/opt/Qt/6.5.1/gcc_64/include/QtCore/qnativeinterface.h \
-		ui_widgetusb202.h
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/QTimer \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qtimer.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qbasictimer.h \
+		../TD2_USB202/mcculdaq.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/QtGlobal \
+		../include/uldaq.h \
+		../include/UlDaqDeviceManager.h \
+		../include/interfaces/UlDaqDevice.h \
+		../include/interfaces/UlAiDevice.h \
+		../include/interfaces/UlAiConfig.h \
+		../include/interfaces/UlAiInfo.h \
+		../include/interfaces/UlAoDevice.h \
+		../include/interfaces/UlAoConfig.h \
+		../include/interfaces/UlAoInfo.h \
+		../include/interfaces/UlCtrDevice.h \
+		../include/interfaces/UlCtrInfo.h \
+		../include/interfaces/UlCtrConfig.h \
+		../include/interfaces/UlDaqDeviceConfig.h \
+		../include/interfaces/UlDaqDeviceInfo.h \
+		../include/interfaces/UlDevMemInfo.h \
+		../include/interfaces/UlMemRegionInfo.h \
+		../include/interfaces/UlDaqIDevice.h \
+		../include/interfaces/UlDaqIInfo.h \
+		../include/interfaces/UlDaqODevice.h \
+		../include/interfaces/UlDaqOInfo.h \
+		../include/interfaces/UlDioDevice.h \
+		../include/interfaces/UlDioConfig.h \
+		../include/interfaces/UlDioInfo.h \
+		../include/interfaces/UlTmrDevice.h \
+		../include/interfaces/UlTmrInfo.h \
+		../include/UlException.h \
+		../include/DioDevice.h \
+		../include/IoDevice.h \
+		../include/DaqDevice.h \
+		../include/DaqDeviceId.h \
+		../include/DaqDeviceInfo.h \
+		../include/ul_internal.h \
+		../include/DevMemInfo.h \
+		../include/MemRegionInfo.h \
+		../include/DaqDeviceConfig.h \
+		../include/utility/FnLog.h \
+		../include/utility/Endian.h \
+		../include/utility/UlLock.h \
+		../include/utility/ThreadEvent.h \
+		../include/DioInfo.h \
+		../include/DioPortInfo.h \
+		../include/interfaces/UlDioPortInfo.h \
+		../include/DioConfig.h \
+		../include/AoDevice.h \
+		../include/AoInfo.h \
+		../include/AoConfig.h \
+		../include/AiDevice.h \
+		../include/AiInfo.h \
+		../include/AiChanInfo.h \
+		../include/interfaces/UlAiChanInfo.h \
+		../include/AiConfig.h \
+		../include/CtrDevice.h \
+		../include/CtrInfo.h \
+		../include/CtrConfig.h \
+		ui_widgetusb202.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/QVariant \
+		/opt/Qt/6.5.1/gcc_64/include/QtWidgets/QApplication \
+		/opt/Qt/6.5.1/gcc_64/include/QtWidgets/qapplication.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qcoreapplication.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qeventloop.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qcoreapplication_platform.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qfuture.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qfutureinterface.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qmutex.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qtsan_impl.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qresultstore.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qfuture_impl.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qthreadpool.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qthread.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qelapsedtimer.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qrunnable.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qexception.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qpromise.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtGui/qguiapplication.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtGui/qinputmethod.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtCore/qlocale.h \
+		/opt/Qt/6.5.1/gcc_64/include/QtGui/qguiapplication_platform.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o widgetusb202.o ../TD2_USB202/widgetusb202.cpp
 
 moc_widgetusb202.o: moc_widgetusb202.cpp 

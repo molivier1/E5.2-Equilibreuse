@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>227</width>
+    <height>170</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>WidgetUSB202</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -28,7 +28,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QLabel" name="labelBP1">
+         <widget class="QLabel" name="label_BP1">
           <property name="styleSheet">
            <string notr="true">background-color: rgb(239, 41, 41);
 text-align: center;</string>
@@ -39,7 +39,7 @@ text-align: center;</string>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBoxLED1">
+         <widget class="QCheckBox" name="checkBox_LED1">
           <property name="text">
            <string>LED1</string>
           </property>
@@ -50,7 +50,7 @@ text-align: center;</string>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QLabel" name="labelBP2">
+         <widget class="QLabel" name="label_BP2">
           <property name="styleSheet">
            <string notr="true">background-color: rgb(239, 41, 41);
 text-align: center;</string>
@@ -61,7 +61,7 @@ text-align: center;</string>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBoxLED2">
+         <widget class="QCheckBox" name="checkBox_LED2">
           <property name="text">
            <string>LED2</string>
           </property>
@@ -72,7 +72,7 @@ text-align: center;</string>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QLabel" name="labelBP3">
+         <widget class="QLabel" name="label_BP3">
           <property name="styleSheet">
            <string notr="true">background-color: rgb(239, 41, 41);
 text-align: center;</string>
@@ -83,7 +83,7 @@ text-align: center;</string>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBoxLED3">
+         <widget class="QCheckBox" name="checkBox_LED3">
           <property name="text">
            <string>LED3</string>
           </property>
@@ -94,7 +94,7 @@ text-align: center;</string>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
-         <widget class="QLabel" name="labelBP4">
+         <widget class="QLabel" name="label_BP4">
           <property name="styleSheet">
            <string notr="true">background-color: rgb(239, 41, 41);
 text-align: center;</string>
@@ -105,7 +105,7 @@ text-align: center;</string>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBoxLED4">
+         <widget class="QCheckBox" name="checkBox_LED4">
           <property name="text">
            <string>LED4</string>
           </property>
@@ -119,8 +119,19 @@ text-align: center;</string>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QPushButton" name="pushButtonQuitter">
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Quitter</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -143,5 +154,22 @@ text-align: center;</string>
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButtonQuitter</sender>
+   <signal>clicked()</signal>
+   <receiver>WidgetUSB202</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>150</x>
+     <y>43</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>863</x>
+     <y>29</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
