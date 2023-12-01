@@ -10,7 +10,6 @@ class Capot : public QObject
     Q_OBJECT
 public:
     Capot(MccUldaq &_laCarte, const int _numDio, QObject *parent = nullptr);
-    void onTimerCapot_timeout();
 private:
     bool etatCapot;
     bool etatCourant;
@@ -20,6 +19,9 @@ private:
 
 signals:
     void EtatCapotChange(const bool _etat);
+
+public slots:
+    void onTimerCapot_timeout();
 };
 
 #endif // CAPOT_H
