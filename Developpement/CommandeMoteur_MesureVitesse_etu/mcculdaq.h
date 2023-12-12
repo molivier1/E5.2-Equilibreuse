@@ -2,13 +2,13 @@
 #define MCCULDAQ_H
 
 #include <QtGlobal>
-#include "../includes/uldaq.h"
-#include "../includes/UlDaqDeviceManager.h"
-#include "../includes/UlException.h"
-#include "../includes/DioDevice.h"
-#include "../includes/AoDevice.h"
-#include "../includes/AiDevice.h"
-#include "../includes/CtrDevice.h"
+#include "../include/uldaq.h"
+#include "../include/UlDaqDeviceManager.h"
+#include "../include/UlException.h"
+#include "../include/DioDevice.h"
+#include "../include/AoDevice.h"
+#include "../include/AiDevice.h"
+#include "../include/CtrDevice.h"
 
 
 #define MAX_DEV_COUNT  100

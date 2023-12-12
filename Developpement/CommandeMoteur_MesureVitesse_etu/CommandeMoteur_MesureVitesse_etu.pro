@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     capot.cpp \
+    codeur.cpp \
     main.cpp \
     equilibreuse.cpp \
     mcculdaq.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
 
 HEADERS += \
     capot.h \
+    codeur.h \
     constantes.h \
     equilibreuse.h \
     mcculdaq.h \
